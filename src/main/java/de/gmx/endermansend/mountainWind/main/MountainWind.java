@@ -7,6 +7,8 @@ public class MountainWind extends JavaPlugin {
     @Override
     public void onEnable() {
 
+        (new SoundHandler()).runTaskTimer(this, 0L, 100L);
+
         getLogger().info("Enabled");
 
     }
