@@ -1,0 +1,9 @@
+# Defines at which level the sound effect is going to start
+blockLevel: 120
+# Defines a time interval in seconds until the wind effect is played again
+playInterval: 3
+allowedGamemodes:
+  SPECTATOR: true
+  SURVIVAL: true
+  CREATIVE: true
+  ADVENTURE: true
