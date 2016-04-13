@@ -9,6 +9,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class SoundHandler extends BukkitRunnable {
 
@@ -18,7 +19,10 @@ public class SoundHandler extends BukkitRunnable {
 
     private int blockLevel;
 
+    private Logger logger;
+
     public SoundHandler(MountainWind main) {
+        this.logger = main.getLogger();
         ConfigHandler config = main.getConfigHandler();
         allowedModes = config.get.allowedGameModes();
         blockLevel = config.get.blockLevel();
@@ -26,11 +30,15 @@ public class SoundHandler extends BukkitRunnable {
     }
 
     public void run() {
-        for (Player player : registeredPlayers) {
-            if (player.getLocation().getY() >= blockLevel) {
-                if (allowedModes.get(player.getGameMode().toString()))
-                    player.playSound(player.getLocation(), Sound.ITEM_ELYTRA_FLYING, 1, 1);
+        try {
+            for (Player player : registeredPlayers) {
+                if (player.getLocation().getY() >= blockLevel) {
+                    if (allowedModes.get(player.getGameMode().toString()))
+                        player.playSound(player.getLocation(), Sound.ITEM_ELYTRA_FLYING, 1, 1);
+                }
             }
+        } catch (NoSuchFieldError e) {
+            logger.severe("This plugin only works with 1.9.2 or above. Please update.");
         }
     }
 
