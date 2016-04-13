@@ -2,3 +2,7 @@ name: MountainWind
 version: 0.9
 author: EndermansEnd
 main: de.gmx.endermansend.mountainWind.main.MountainWind
+commands:
+  mountainWind:
+    description: Use it to enable/disable wind effects for yourself
+    usage: /mountainWind <enable|disable>
