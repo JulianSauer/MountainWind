@@ -14,6 +14,8 @@ public class SoundHandler extends BukkitRunnable {
 
     private Map<String, Boolean> allowedModes;
 
+    private Map<String, Boolean> allowedWorlds;
+
     private Collection<Player> registeredPlayers;
 
     private int blockLevel;
@@ -31,7 +33,8 @@ public class SoundHandler extends BukkitRunnable {
         roofHeight = config.get.roofHeight();
 
         registeredPlayers = new ArrayList<Player>((Collection<Player>) Bukkit.getOnlinePlayers());
-        checkWorlds(config.get.allowedWorlds());
+        allowedWorlds = config.get.allowedWorlds();
+        checkWorlds();
 
     }
 
@@ -49,7 +52,8 @@ public class SoundHandler extends BukkitRunnable {
     }
 
     public void addPlayer(Player player) {
-        registeredPlayers.add(player);
+        if (allowedWorlds.get(player.getWorld().getName()))
+            registeredPlayers.add(player);
     }
 
     public void removePlayer(Player player) {
@@ -58,10 +62,8 @@ public class SoundHandler extends BukkitRunnable {
 
     /**
      * Checks the allowed worlds on startup
-     *
-     * @param allowedWorlds
      */
-    private void checkWorlds(Map<String, Boolean> allowedWorlds) {
+    private void checkWorlds() {
 
         for (Player player : registeredPlayers) {
             if (!allowedWorlds.get(player.getWorld().getName()))
