@@ -52,7 +52,7 @@ public class SoundHandler extends BukkitRunnable {
     }
 
     public void addPlayer(Player player) {
-        if (allowedWorlds.get(player.getWorld().getName()))
+        if (allowedWorlds.get(player.getWorld().getName()) && !registeredPlayers.contains(player))
             registeredPlayers.add(player);
     }
 
