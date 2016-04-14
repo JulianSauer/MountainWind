@@ -31,6 +31,10 @@ public class GetValuesFromConfig {
         return config.getIntFromConfig("playInterval");
     }
 
+    public int roofHeight() {
+        return config.getIntFromConfig("roofHeight");
+    }
+
     /**
      * Returns the game modes and if they are allowed to hear the wind effect.
      *

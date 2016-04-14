@@ -2,6 +2,8 @@
 blockLevel: 120
 # Defines a time interval in seconds until the wind effect is played again
 playInterval: 3
+# Defines how high a block can be above the player to count as a roof and hence disable the effect
+roofHeight: 10
 allowedGamemodes:
   SPECTATOR: true
   SURVIVAL: true
