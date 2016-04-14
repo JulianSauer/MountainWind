@@ -46,4 +46,19 @@ public class GetValuesFromConfig {
         return (Map) section.getValues(false);
     }
 
+    /**
+     * Returns world names and if players are allowed to hear wind in that world.
+     *
+     * @return A list containing world names with true if players are supposed to hear the effect here
+     */
+    public Map<String, Boolean> allowedWorlds() {
+        ConfigurationSection section = config.getConfigurationSectionFromConfig("allowedWorlds");
+
+        if (section == null) {
+            config.noValueFound("allowedWorlds");
+            return new HashMap<String, Boolean>();
+        }
+        return (Map) section.getValues(false);
+    }
+
 }

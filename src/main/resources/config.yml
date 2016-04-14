@@ -7,3 +7,6 @@ allowedGamemodes:
   SURVIVAL: true
   CREATIVE: true
   ADVENTURE: true
+allowedWorlds:
+  world: true
+  world_nether: false

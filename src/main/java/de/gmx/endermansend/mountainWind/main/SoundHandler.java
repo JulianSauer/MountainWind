@@ -27,6 +27,7 @@ public class SoundHandler extends BukkitRunnable {
         allowedModes = config.get.allowedGameModes();
         blockLevel = config.get.blockLevel();
         registeredPlayers = new ArrayList<Player>((Collection<Player>) Bukkit.getOnlinePlayers());
+        checkWorlds(config.get.allowedWorlds());
     }
 
     public void run() {
@@ -48,6 +49,19 @@ public class SoundHandler extends BukkitRunnable {
 
     public void removePlayer(Player player) {
         registeredPlayers.remove(player);
+    }
+
+    /**
+     * Checks the allowed worlds on startup
+     *
+     * @param allowedWorlds
+     */
+    private void checkWorlds(Map<String, Boolean> allowedWorlds) {
+
+        for (Player player : registeredPlayers) {
+            if (!allowedWorlds.get(player.getWorld().getName()))
+                removePlayer(player);
+        }
     }
 
 }
