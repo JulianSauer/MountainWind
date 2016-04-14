@@ -1,10 +1,7 @@
 package de.gmx.endermansend.mountainWind.main;
 
 import de.gmx.endermansend.mountainWind.config.ConfigHandler;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.block.Block;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -42,7 +39,7 @@ public class SoundHandler extends BukkitRunnable {
         try {
             for (Player player : registeredPlayers) {
                 if (player.getLocation().getY() >= blockLevel) {
-                    if (allowedModes.get(player.getGameMode().toString()) && isRoofAbovePlayer(player))
+                    if (allowedModes.get(player.getGameMode().toString()) && !isRoofAbovePlayer(player))
                         player.playSound(player.getLocation(), Sound.ITEM_ELYTRA_FLYING, 1, 1);
                 }
             }
@@ -80,9 +77,13 @@ public class SoundHandler extends BukkitRunnable {
      */
     private boolean isRoofAbovePlayer(Player player) {
         Location location = player.getLocation();
-        Block block = player.getWorld().getHighestBlockAt(location);
-        if (block != null)
-            return block.getLocation().getY() > (location.getY() + roofHeight);
+        World world = player.getWorld();
+
+        for (int maxHeight = (int) (location.getY() + roofHeight); location.getY() < maxHeight; location.add(0, 1, 0)) {
+            if (world.getBlockAt(location).getType() != Material.AIR)
+                return true;
+        }
+
         return false;
     }
 
