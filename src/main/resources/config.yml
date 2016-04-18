@@ -1,7 +1,7 @@
 # Defines at which level the sound effect is going to start
 blockLevel: 120
 # Defines a time interval in seconds until the wind effect is played again
-playInterval: 3
+playInterval: 1
 # Defines how high a block can be above the player to count as a roof and hence disable the effect
 roofHeight: 10
 allowedGamemodes:
@@ -12,3 +12,4 @@ allowedGamemodes:
 allowedWorlds:
   world: true
   world_nether: false
+  world_the_end: false

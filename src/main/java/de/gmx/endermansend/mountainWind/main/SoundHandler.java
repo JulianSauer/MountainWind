@@ -43,7 +43,7 @@ public class SoundHandler extends BukkitRunnable {
             for (Player player : registeredPlayers) {
                 if (player.getLocation().getY() >= blockLevel) {
                     if (allowedModes.get(player.getGameMode().toString()) && !isRoofAbovePlayer(player))
-                        player.playSound(player.getLocation(), Sound.ITEM_ELYTRA_FLYING, 1, 1);
+                        player.playSound(randomizeLocation(player.getLocation()), Sound.ITEM_ELYTRA_FLYING, (float) (Math.random() + 0.3), 1);
                 }
             }
         } catch (NoSuchFieldError e) {
@@ -87,6 +87,22 @@ public class SoundHandler extends BukkitRunnable {
         }
 
         return false;
+    }
+
+    /**
+     * Changes a location slightly.
+     *
+     * @param location Location that should be changed
+     * @return Possibly a slightly changed location
+     */
+    private Location randomizeLocation(Location location) {
+        if (Math.random() < 0.3)
+            location.add(Math.random() * 3 + 1, 0, 0);
+        if (Math.random() < 0.2)
+            location.add(0, Math.random() * 3 + 1, 0);
+        if (Math.random() < 0.3)
+            location.add(0, 0, Math.random() * 3 + 1);
+        return location;
     }
 
 }
